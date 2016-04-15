@@ -9,13 +9,18 @@ int ScreenSize_H = 0;
 int PaddleSize_W = 0; // Initialized from bitmap size
 int PaddleSize_H = 0;
 
+int Paddle2Size_W = 0; // Initialized from bitmap size
+int Paddle2Size_H = 0;
+
+double velocidad_adicional =1;
 int BallSize_W = 0; // Initialized from bitmap size
 int BallSize_H = 0;
-int direccion_y = 1;
-int direccion_x = 1;
+double direccion_y = 1;
+bool juego_activo = 1;
+double direccion_x = 1;
 static int PressingLeft = 0;
 static int PressingRight = 0;
-int puntos =0;
+int vidas =3;
 void InitializeGame()
 {
     PaddlePosition.X = (ScreenSize_W - PaddleSize_W) / 2;
@@ -50,7 +55,8 @@ void limites_pantalla()
 	if(BallPosition.Y + BallSize_W > ScreenSize_H)
 	{
 		
-		puntos--;
+		vidas--;
+		velocidad_adicional=1;
 		BallPosition.X = (ScreenSize_W - BallSize_W) / 2;
 		direccion_y=1;
 		BallPosition.Y = 0+BallSize_H;
@@ -64,21 +70,41 @@ void limites_pantalla()
 
 	
 }
+bool limite_raqueta()
+{
+	if(PaddlePosition.X  <0){
+	PaddlePosition.X +=2;
+	return false;
+	}
+	if(PaddlePosition.X + PaddleSize_W > ScreenSize_W){
+	PaddlePosition.X -=2;
+	return false;
+	}
+	else 
+	return true;
+}
 void rebotar_raqueta()
 {   
-
-	if(  BallPosition.X + BallSize_W/2  > PaddlePosition.X - PaddleSize_W/2 && //borde izquierdo de la raqueta
-		 BallPosition.X - BallSize_W/2   < PaddlePosition.X + PaddleSize_W && //borde derecho de la raqueta
-		 BallPosition.Y + BallSize_H/2 > PaddlePosition.Y - PaddleSize_H/2 ) //borde superior de la raqueta)
+    SDL_Delay(2);
+	if(  BallPosition.X  + BallSize_W > PaddlePosition.X  && //borde izquierdo de la raqueta
+		 BallPosition.X - BallSize_W   < PaddlePosition.X + PaddleSize_W && //borde derecho de la raqueta
+		 BallPosition.Y + BallSize_H > PaddlePosition.Y  ) //borde superior de la raqueta)
 	{
+		velocidad_adicional+=0.2;
 		 if (PressingLeft && direccion_x==1){
-         direccion_x*=-1;
-         direccion_y*=-1;
+		 BallPosition.Y-=2;
+		 BallPosition.X-=2;
+         direccion_x=-1;
+         direccion_y=-1;
 	}
 
     if (PressingRight && direccion_x==-1){
-      direccion_x*=-1;
-	  direccion_y*=-1;
+		BallPosition.Y-=2;
+		BallPosition.X+=2;
+      direccion_x=1;
+	  direccion_y=-1;
+	  
+	  
 	}
 	else{
       direccion_x*=1;
@@ -88,23 +114,37 @@ void rebotar_raqueta()
 	}
 	 
 }
+//~ void sacudida_raqueta()
+//~ {
+	//~ Vector2D pos_inicial;
+	//~ pos_inicial.X = PaddlePosition.X;
+	//~ pos_inicial.Y = PaddlePosition.Y;
+	//~ PaddlePosition.X
+	//~ 
+//~ }
 
-
-void UpdateGame(float deltaTime)
+bool UpdateGame(float deltaTime)
 {
-    const float PaddleSpeed = 200.0f;
-    const float BallSpeed = 250.0f;
+    const float PaddleSpeed = 400.0f;
+    const float BallSpeed = 200.0f;
 
-    BallPosition.X += direccion_x*(BallSpeed * deltaTime);
-    BallPosition.Y += direccion_y*(BallSpeed * deltaTime);
-    if (PressingLeft){
-        PaddlePosition.X -= PaddleSpeed * deltaTime;
+    BallPosition.X += direccion_x*(BallSpeed * deltaTime) * velocidad_adicional;
+    BallPosition.Y += direccion_y*(BallSpeed * deltaTime) * velocidad_adicional;
+    if(limite_raqueta()){
+		if (PressingLeft){
+			PaddlePosition.X -= PaddleSpeed * deltaTime;
+		}
+			
+		
+		if (PressingRight){
+			PaddlePosition.X += PaddleSpeed * deltaTime;
+		 
+		}
 	}
-        
-    limites_pantalla();
-    rebotar_raqueta();
-    if (PressingRight){
-        PaddlePosition.X += PaddleSpeed * deltaTime;
-     
-	}
+	limites_pantalla();
+		rebotar_raqueta();
+		if(vidas>=0)
+		return false;
+		else
+		return true;
 }

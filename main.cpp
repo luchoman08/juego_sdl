@@ -10,6 +10,7 @@
 
 int main ( int argc, char** argv )
 {
+	
     // initialize SDL video
     if ( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
@@ -80,14 +81,14 @@ int main ( int argc, char** argv )
         float deltaTime = currentTime - lastTime;
 
         if (deltaTime > 0)
-            UpdateGame(deltaTime);
+           done = UpdateGame(deltaTime);
 
         lastTime = currentTime;
-
+        
         DrawGameGraphics(screen);
-       SDL_Delay(30);
+       SDL_Delay(20);
     } // end main loop
-
+	SDL_Delay(1000);
     FreeGameGraphics();
 
     // all is well ;)
