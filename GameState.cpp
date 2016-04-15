@@ -1,6 +1,7 @@
 #include "GameState.h"
 
 Vector2D PaddlePosition;
+Vector2D Paddle2Position;
 Vector2D BallPosition;
 
 int ScreenSize_W = 0; // Initalized from screen surface size
@@ -20,12 +21,18 @@ bool juego_activo = 1;
 double direccion_x = 1;
 static int PressingLeft = 0;
 static int PressingRight = 0;
+
+static int PressingLeft2 = 0;
+static int PressingRight2 = 0;
 int vidas =3;
 void InitializeGame()
 {
     PaddlePosition.X = (ScreenSize_W - PaddleSize_W) / 2;
     PaddlePosition.Y = ScreenSize_H - PaddleSize_H - 40;
-
+    
+    Paddle2Position.X = PaddlePosition.X;
+    Paddle2Position.Y = 40;
+    
     BallPosition.X = (ScreenSize_W - BallSize_W) / 2;
     BallPosition.Y = ScreenSize_H / 2;
 }
@@ -46,6 +53,20 @@ void UpdatePlayerInput(const SDL_Event * event)
 
     if (event->type == SDL_KEYUP && event->key.keysym.sym == SDLK_RIGHT)
         PressingRight = 0;
+        
+        //player 2
+        
+      if (event->type == SDL_KEYDOWN && event->key.keysym.sym == SDLK_q)
+        PressingLeft2 = 1;
+
+    if (event->type == SDL_KEYUP && event->key.keysym.sym == SDLK_q)
+        PressingLeft2 = 0;
+
+    if (event->type == SDL_KEYDOWN && event->key.keysym.sym == SDLK_e)
+        PressingRight2 = 1;
+
+    if (event->type == SDL_KEYUP && event->key.keysym.sym == SDLK_e)
+        PressingRight2 = 0;   
 }
 void limites_pantalla()
 {
@@ -78,6 +99,19 @@ bool limite_raqueta()
 	}
 	if(PaddlePosition.X + PaddleSize_W > ScreenSize_W){
 	PaddlePosition.X -=2;
+	return false;
+	}
+	else 
+	return true;
+}
+bool limite_raqueta2()
+{
+	if(Paddle2Position.X  <0){
+	Paddle2Position.X +=2;
+	return false;
+	}
+	if(Paddle2Position.X + PaddleSize_W > ScreenSize_W){
+	Paddle2Position.X -=2;
 	return false;
 	}
 	else 
@@ -138,6 +172,20 @@ bool UpdateGame(float deltaTime)
 		
 		if (PressingRight){
 			PaddlePosition.X += PaddleSpeed * deltaTime;
+		 
+		}
+		
+		
+	}
+	if(limite_raqueta2())
+	{
+		if (PressingLeft2){
+			Paddle2Position.X -= PaddleSpeed * deltaTime;
+		}
+			
+		
+		if (PressingRight2){
+			Paddle2Position.X += PaddleSpeed * deltaTime;
 		 
 		}
 	}

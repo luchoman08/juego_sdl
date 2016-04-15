@@ -19,7 +19,7 @@ int LoadGameGraphics()
 {
 	GameOver = SDL_LoadBMP("game_over1.bmp");
     PaddleGraphic1 = SDL_LoadBMP("paddle_1.bmp");
-    PaddleGraphic1 = SDL_LoadBMP("paddle_2.bmp");
+    PaddleGraphic2 = SDL_LoadBMP("paddle_2.bmp");
     if (!PaddleGraphic1)
     {
         printf("Unable to load bitmap: %s\n", SDL_GetError());
@@ -58,6 +58,12 @@ void DrawGameGraphics(SDL_Surface * screen)
     SDL_FillRect(screen, 0, SDL_MapRGB(screen->format, 0, 0, 0));
 
     SDL_Rect dstrect;
+    dstrect.x = (int)Paddle2Position.X;
+    dstrect.y = (int)Paddle2Position.Y;
+
+    // draw paddle2 bitmap
+    SDL_BlitSurface(PaddleGraphic2, 0, screen, &dstrect);
+    
     dstrect.x = (int)PaddlePosition.X;
     dstrect.y = (int)PaddlePosition.Y;
 
