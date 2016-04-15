@@ -15,7 +15,7 @@ int direccion_y = 1;
 int direccion_x = 1;
 static int PressingLeft = 0;
 static int PressingRight = 0;
-
+int puntos =0;
 void InitializeGame()
 {
     PaddlePosition.X = (ScreenSize_W - PaddleSize_W) / 2;
@@ -48,16 +48,25 @@ void limites_pantalla()
 	direccion_y*=-1;
 	
 	if(BallPosition.Y + BallSize_W > ScreenSize_H)
-	direccion_y*=-1;
+	{
+		
+		puntos--;
+		BallPosition.X = (ScreenSize_W - BallSize_W) / 2;
+		direccion_y=1;
+		BallPosition.Y = 0+BallSize_H;
+	
+	}
 	
 	if(BallPosition.X<0)
 	direccion_x *=-1;
 	if(BallPosition.X + BallSize_H>ScreenSize_W)
 	direccion_x *=-1;
+
+	
 }
 void rebotar_raqueta()
 {   
-	
+
 	if(  BallPosition.X + BallSize_W/2  > PaddlePosition.X - PaddleSize_W/2 && //borde izquierdo de la raqueta
 		 BallPosition.X - BallSize_W/2   < PaddlePosition.X + PaddleSize_W && //borde derecho de la raqueta
 		 BallPosition.Y + BallSize_H/2 > PaddlePosition.Y - PaddleSize_H/2 ) //borde superior de la raqueta)

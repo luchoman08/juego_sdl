@@ -85,7 +85,7 @@ int main ( int argc, char** argv )
         lastTime = currentTime;
 
         DrawGameGraphics(screen);
-
+       SDL_Delay(30);
     } // end main loop
 
     FreeGameGraphics();

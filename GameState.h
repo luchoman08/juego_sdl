@@ -17,7 +17,7 @@ extern int ScreenSize_H;
 
 extern int PaddleSize_W;
 extern int PaddleSize_H;
-
+extern int puntos;
 extern int BallSize_W;
 extern int BallSize_H;
 
