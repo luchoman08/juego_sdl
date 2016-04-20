@@ -3,14 +3,15 @@
 #else
     #include <stdlib.h>
 #endif
-
+#include <vector>
 #include <SDL/SDL.h>
 #include "GameGraphics.h"
 #include "GameState.h"
+typedef std::vector<int> s;
 
 int main ( int argc, char** argv )
 {
-	
+	s r;
     // initialize SDL video
     if ( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
@@ -86,7 +87,7 @@ int main ( int argc, char** argv )
         lastTime = currentTime;
         
         DrawGameGraphics(screen);
-       SDL_Delay(20);
+
     } // end main loop
 	SDL_Delay(1000);
     FreeGameGraphics();

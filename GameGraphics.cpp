@@ -15,6 +15,7 @@ SDL_Surface* Life1 = 0;
 SDL_Surface* Life2 = 0;
 SDL_Surface* Life3 = 0;
 SDL_Surface* GameOver = 0;
+
 int LoadGameGraphics()
 {
 	GameOver = SDL_LoadBMP("game_over1.bmp");
