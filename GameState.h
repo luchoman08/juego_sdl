@@ -13,8 +13,8 @@ extern Vector2D PaddlePosition;
 extern Vector2D Paddle2Position;
 extern Vector2D BallPosition;
 extern Vector2D BallDirector;
-extern float angulo;
-extern int iSecret, iGuess, iDireccion_X;
+extern float angulo; //grados
+extern float iSecret, iGuess, iDireccion_X;
 extern int ScreenSize_W;
 extern int ScreenSize_H;
 extern double velocidad_adicional;

@@ -11,7 +11,7 @@ typedef std::vector<int> s;
 
 int main ( int argc, char** argv )
 {
-	s r;
+
     // initialize SDL video
     if ( SDL_Init( SDL_INIT_VIDEO ) < 0 )
     {
@@ -87,7 +87,7 @@ int main ( int argc, char** argv )
         lastTime = currentTime;
         
         DrawGameGraphics(screen);
-
+	
     } // end main loop
 	SDL_Delay(1000);
     FreeGameGraphics();
