@@ -236,7 +236,7 @@ bool UpdateGame(float deltaTime, float currentime)
 	
 		rebotar_raqueta(&PaddlePosition);
 		rebotar_raqueta(&Paddle2Position);
-		if((int)(currentime *1000 )% 30 == 0){
+		if((int)(currentime *1000 )% 3 == 0){
 		PaddlePosition.Y = ScreenSize_H - PaddleSize_H - 40;
         Paddle2Position.Y = 40;
 	}
