@@ -26,10 +26,19 @@ SDL_Surface* Number6 = 0;
 SDL_Surface* Number7 = 0;
 SDL_Surface* Number8 = 0;
 SDL_Surface* Number9 = 0;
+SDL_Surface* Win_O = 0;
+SDL_Surface* Win_B = 0;
 SDL_Surface* PuntuacionX = 0;//puntuacion del jugador de abajo
 SDL_Surface* PuntuacionY = 0;//puntuacion del jugador de arriba
 SDL_Surface* GameOver = 0;
 
+void dibujarTexto()
+{
+	
+	
+
+
+}
 int LoadGameGraphics()
 {
 	GameOver = SDL_LoadBMP("game_over1.bmp");
@@ -47,6 +56,8 @@ int LoadGameGraphics()
     Number7 = SDL_LoadBMP("Number7.bmp");
     Number8 = SDL_LoadBMP("Number8.bmp");
     Number9 = SDL_LoadBMP("Number9.bmp");
+    Win_O = SDL_LoadBMP("win_orange.bmp");
+     Win_B = SDL_LoadBMP("win_blue.bmp");
     PuntuacionY = Number0;
     PuntuacionX = Number0;
     Fondo = SDL_LoadBMP("fondo.bmp");
@@ -129,11 +140,12 @@ void DrawGameGraphics(SDL_Surface * screen)
 		case 9: PuntuacionX=Number9; SDL_FillRect(screen, 0, SDL_MapRGB(screen->format, 0, 0, 0));
 
     SDL_Rect dstrect;
-    dstrect.x = (int)(ScreenSize_W /2) - GameOver->w /2 ;
-    dstrect.y = (int)ScreenSize_H/2;
+  //dibujar la puntuacion de x
+    dstrect.x = (ScreenSize_W + Win_B->w)/2;
+    dstrect.y = (ScreenSize_H + Win_B->h)/2;
 
     // draw paddle bitmap
-    SDL_BlitSurface(GameOver, 0, screen, &dstrect);
+    SDL_BlitSurface(Win_O, 0, screen, &dstrect);
 
     // finally, update the screen :)
     SDL_Flip(screen);break;
@@ -152,15 +164,13 @@ void DrawGameGraphics(SDL_Surface * screen)
 		case 8: PuntuacionY=Number8;break;
 		case 9: PuntuacionY=Number9;  SDL_FillRect(screen, 0, SDL_MapRGB(screen->format, 0, 0, 0));
 
-    SDL_Rect dstrect;
-    dstrect.x = (int)(ScreenSize_W /2) - GameOver->w /2 ;
-    dstrect.y = (int)ScreenSize_H/2;
+
+     SDL_Rect dstrect;
+       dstrect.x = (ScreenSize_W + Win_B->w)/2;
+    dstrect.y = (ScreenSize_H + Win_B->h)/2;
 
     // draw paddle bitmap
-    SDL_BlitSurface(GameOver, 0, screen, &dstrect);
-
-    // finally, update the screen :)
-    SDL_Flip(screen);break;
+    SDL_BlitSurface(Win_B, 0, screen, &dstrect);
 		default: break;
 	}
 	 //dibujar la puntuacion de Y
@@ -172,8 +182,8 @@ void DrawGameGraphics(SDL_Surface * screen)
 	
 
     //dibujar la puntuacion de x
-    dstrect.x = ScreenSize_W - NumberSize_W;
-    dstrect.y = ScreenSize_H - NumberSize_H;;
+    dstrect.x = (ScreenSize_W - NumberSize_W);
+    dstrect.y = (ScreenSize_H - NumberSize_H);;
 
     // draw paddle bitmap
     SDL_BlitSurface(PuntuacionX, 0, screen, &dstrect);

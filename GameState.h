@@ -32,6 +32,6 @@ extern int BallSize_H;
 extern bool juego_activo;
 void InitializeGame();
 void UpdatePlayerInput(const SDL_Event * event);
-bool UpdateGame(float deltaTime);
+bool UpdateGame(float deltaTime, float currentime);
 
 #endif // GAMESTATE_H_INCLUDED

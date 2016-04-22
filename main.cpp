@@ -82,7 +82,7 @@ int main ( int argc, char** argv )
         float deltaTime = currentTime - lastTime;
 
         if (deltaTime > 0)
-           done = UpdateGame(deltaTime);
+           done = UpdateGame(deltaTime, currentTime);
 
         lastTime = currentTime;
         
