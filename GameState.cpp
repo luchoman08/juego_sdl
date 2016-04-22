@@ -3,7 +3,7 @@
 Vector2D PaddlePosition;
 Vector2D Paddle2Position;
 Vector2D BallPosition;
-
+Vectir2D BallDirection;
 int ScreenSize_W = 0; // Initalized from screen surface size
 int ScreenSize_H = 0;
 
@@ -119,7 +119,7 @@ bool limite_raqueta2()
 }
 void rebotar_raqueta()
 {   
-    SDL_Delay(2);
+  
 	if(  BallPosition.X  + BallSize_W > PaddlePosition.X  && //borde izquierdo de la raqueta
 		 BallPosition.X - BallSize_W   < PaddlePosition.X + PaddleSize_W && //borde derecho de la raqueta
 		 BallPosition.Y + BallSize_H > PaddlePosition.Y  ) //borde superior de la raqueta)

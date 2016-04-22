@@ -12,10 +12,9 @@ typedef struct
 extern Vector2D PaddlePosition;
 extern Vector2D Paddle2Position;
 extern Vector2D BallPosition;
-
+extern Vector2D BallDDirection;
 extern int ScreenSize_W;
 extern int ScreenSize_H;
-extern double velocidad_adicional;
 extern int PaddleSize_W;
 extern int PaddleSize_H;
 extern int Paddle2Size_W;
