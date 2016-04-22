@@ -203,7 +203,7 @@ void rebotar_raqueta(Vector2D *raqueta)
 bool UpdateGame(float deltaTime, float currentime)
 {
     const float PaddleSpeed = 400.0f;
-    const float BallSpeed = 2000.0f;
+    const float BallSpeed = 200.0f;
     
     BallPosition.X += BallDirector.X * (BallSpeed * deltaTime) * velocidad_adicional * cos((angulo*M_PI)/180);
     BallPosition.Y += BallDirector.Y * (BallSpeed * deltaTime) * velocidad_adicional * sin((angulo*M_PI)/180);
