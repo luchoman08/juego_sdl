@@ -98,7 +98,11 @@ void limites_pantalla()
 		BallPosition.X = (ScreenSize_W - BallSize_W) / 2;
 		BallDirector.Y=-1;
 		BallPosition.Y = (ScreenSize_H + BallSize_H)/2;
-		  
+		 /* initialize random seed: */
+    srand (time(NULL));
+
+    /* generate secret number between 1 and 10: */
+   angulo = abs(rand() % 45 + 80); 
 	}
 	
 	//abajo
@@ -111,8 +115,11 @@ void limites_pantalla()
 		BallDirector.Y=1;
 		BallPosition.Y = (ScreenSize_H + BallSize_H)/2;
 
-    
-     BallDirector.X=rand() % -1 + 1;
+    /* initialize random seed: */
+    srand (time(NULL));
+
+    /* generate secret number between 1 and 10: */
+   angulo = abs(rand() % 45 + 80);
 	}
 	//izquierda
 	if(BallPosition.X<0){
