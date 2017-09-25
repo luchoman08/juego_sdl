@@ -1,4 +1,5 @@
 # juego_sdl
+Hola mundo :v
 
 Luis Gerardo Manrique Cardona 1327951-3743
 
