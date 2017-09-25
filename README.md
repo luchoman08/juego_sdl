@@ -1,6 +1,6 @@
 # juego_sdl
 Hola mundo :v
-
+Hola mundo2 :v
 Luis Gerardo Manrique Cardona 1327951-3743
 
 Las teclas q-e son las que controlan la raqueta superior, las flechas derecha-izquierda controlan la inferior.
